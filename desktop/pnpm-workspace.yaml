@@ -1,0 +1,9 @@
+overrides:
+  '@xmldom/xmldom': 0.8.15
+
+allowBuilds:
+  electron: true
+  electron-winstaller: false
+
+minimumReleaseAgeExclude:
+  - lucide-react@1.31.0

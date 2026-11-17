@@ -1,0 +1,14 @@
+Velia Computer Voice Assistant
+Copyright (c) 2026 Velia
+
+Velia-owned code is made available under Apache License 2.0 with the
+Commons Clause License Condition v1.0. See LICENSE for the combined terms.
+The Commons Clause notice must accompany required license or attribution notices.
+
+Third-party components and adapted third-party material retain their original
+licenses. The Velia license does not relicense those components. Attribution
+for Project AIRI is preserved in desktop/THIRD_PARTY_NOTICES.md. The whisper.cpp
+and OpenAI Whisper license texts are preserved in desktop/third-party/.
+
+The synthetic PDF and DOCX files in desktop/test/fixtures are test data authored
+for this project. They contain fictional sample information, not customer data.

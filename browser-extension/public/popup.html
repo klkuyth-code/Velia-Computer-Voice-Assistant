@@ -1,0 +1,20 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Velia Browser Bridge</title>
+    <link rel="stylesheet" href="popup.css">
+  </head>
+  <body>
+    <main>
+      <div class="brand"><span>V</span><div><strong>Velia</strong><small>Browser Bridge</small></div></div>
+      <p class="summary">输入 Velia 桌面端显示的配对令牌。令牌只保存在当前浏览器中。</p>
+      <label>配对令牌<input id="token" type="password" autocomplete="off" spellcheck="false"></label>
+      <label>本机端口<input id="port" type="number" min="1024" max="65535" value="47839"></label>
+      <button id="save" type="button">保存并连接</button>
+      <p id="status" class="status">正在读取状态…</p>
+    </main>
+    <script type="module" src="popup.js"></script>
+  </body>
+</html>

@@ -1,0 +1,81 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://schemas.velia.local/rpc-request.v1.schema.json",
+  "title": "Velia RPC request v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema", "id", "method", "params"],
+  "properties": {
+    "schema": { "const": "velia-rpc-request/v1" },
+    "id": { "type": "string", "format": "uuid" },
+    "method": {
+      "enum": [
+        "system.health",
+        "app.bootstrap",
+        "config.getStatus",
+        "config.getProfiles",
+        "config.selectProfile",
+        "config.testProvider",
+        "config.setSecret",
+        "config.removeSecret",
+        "web.test",
+        "voice.transcribe",
+        "voice.testAsr",
+        "voice.getShortcut",
+        "voice.setShortcut",
+        "live.start",
+        "live.sendAudio",
+        "live.sendVideo",
+        "live.submitLocalTranscript",
+        "live.submitToolResult",
+        "live.stop",
+        "live.getStatus",
+        "vision.test",
+        "vision.analyze",
+        "document.open",
+        "document.analyze",
+        "document.close",
+        "conversation.submitText",
+        "conversation.submitToolResult",
+        "conversation.cancel",
+        "conversation.history.getSettings",
+        "conversation.history.updateSettings",
+        "conversation.history.list",
+        "conversation.history.get",
+        "conversation.history.open",
+        "conversation.history.startNew",
+        "conversation.history.delete",
+        "conversation.history.clear",
+        "desktopContext.capture",
+        "desktopContext.replaceSelection",
+        "desktopContext.operateSelectedFiles",
+        "desktopContext.release",
+        "desktopVisual.getForeground",
+        "desktopVisual.executeAction"
+      ]
+    },
+    "params": { "type": "object" }
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "method": { "const": "web.test" }
+        },
+        "required": ["method"]
+      },
+      "then": {
+        "properties": {
+          "params": { "$ref": "#/$defs/emptyParams" }
+        }
+      }
+    }
+  ],
+  "$defs": {
+    "emptyParams": {
+      "type": "object",
+      "additionalProperties": false,
+      "maxProperties": 0
+    }
+  }
+}

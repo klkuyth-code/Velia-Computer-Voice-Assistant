@@ -1,0 +1,11 @@
+[extend]
+useDefault = true
+
+[[allowlists]]
+description = "Public synthetic UUIDs used by UI tests, and a localStorage key name (not credentials)"
+regexTarget = "secret"
+regexes = [
+  '''^2196ea21-1692-46a8-b87b-92c608429ead$''',
+  '''^88dbc31f-e8e4-4500-8af5-cad59b87acdf$''',
+  '''^velia\.live-result-acknowledgements\.v1$''',
+]

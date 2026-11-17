@@ -1,0 +1,40 @@
+# Dependencies and local runtimes
+**/node_modules/
+/.tools/
+
+# Build outputs and generated packages
+**/bin/
+**/obj/
+**/dist/
+**/dist-electron/
+**/dist-renderer/
+**/release/
+**/artifacts/
+**/coverage/
+**/TestResults/
+
+# Credentials, activation archives and personal data
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+*.pfx
+*.p12
+*.vault
+*.vlic
+*.vreq
+*license-ledger*
+/license-studio/
+/user-data/
+/logs/
+*.log
+*.user
+*.suo
+/.vs/
+/.idea/
+
+# Local-only engineering records
+/product-docs/
+/deliveries/
+**/FUNCTIONAL_FREEZE.md

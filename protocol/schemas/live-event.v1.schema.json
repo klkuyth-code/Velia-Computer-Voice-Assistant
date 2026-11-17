@@ -1,0 +1,36 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://velia.local/schemas/live-event.v1.schema.json",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema", "sessionId", "sequence", "atUtc", "type"],
+  "properties": {
+    "schema": { "const": "velia-live-event/v1" },
+    "sessionId": { "type": "string", "format": "uuid" },
+    "sequence": { "type": "integer", "minimum": 1 },
+    "atUtc": { "type": "string", "format": "date-time" },
+    "type": { "enum": ["setup", "listening", "speaking", "audio", "inputTranscript", "outputTranscript", "toolCall", "interrupted", "turnComplete", "reconnecting", "closed", "failed"] },
+    "state": { "enum": ["inactive", "connecting", "listening", "speaking", "reconnecting", "error"] },
+    "audioBase64": { "type": "string", "minLength": 4, "maxLength": 524288, "pattern": "^[A-Za-z0-9+/]+={0,2}$" },
+    "mimeType": { "const": "audio/pcm;rate=24000" },
+    "transcript": { "type": "string", "maxLength": 32768 },
+    "toolCall": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "name", "question"],
+      "properties": {
+        "id": { "type": "string", "minLength": 1, "maxLength": 256 },
+        "name": { "const": "capture_current_screen" },
+        "question": { "type": "string", "minLength": 1, "maxLength": 1000 }
+      }
+    },
+    "message": { "type": "string", "minLength": 1, "maxLength": 300 },
+    "retryable": { "type": "boolean" }
+  },
+  "allOf": [
+    { "if": { "properties": { "type": { "const": "audio" } }, "required": ["type"] }, "then": { "properties": { "audioBase64": true, "mimeType": true }, "required": ["audioBase64", "mimeType"] } },
+    { "if": { "properties": { "type": { "enum": ["inputTranscript", "outputTranscript"] } }, "required": ["type"] }, "then": { "properties": { "transcript": true }, "required": ["transcript"] } },
+    { "if": { "properties": { "type": { "const": "toolCall" } }, "required": ["type"] }, "then": { "properties": { "toolCall": true }, "required": ["toolCall"] } },
+    { "if": { "properties": { "type": { "const": "failed" } }, "required": ["type"] }, "then": { "properties": { "message": true, "retryable": true }, "required": ["message", "retryable"] } }
+  ]
+}

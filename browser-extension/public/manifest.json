@@ -1,0 +1,25 @@
+{
+  "manifest_version": 3,
+  "name": "Velia Browser Bridge",
+  "version": "0.1.15",
+  "description": "Connects Velia to the current browser for fast, locally verified page actions.",
+  "minimum_chrome_version": "116",
+  "permissions": ["tabs", "scripting", "storage"],
+  "host_permissions": ["http://*/*", "https://*/*"],
+  "background": {
+    "service_worker": "service-worker.js",
+    "type": "module"
+  },
+  "content_scripts": [
+    {
+      "matches": ["http://*/*", "https://*/*"],
+      "js": ["content.js"],
+      "run_at": "document_idle",
+      "world": "ISOLATED"
+    }
+  ],
+  "action": {
+    "default_title": "Velia Browser Bridge",
+    "default_popup": "popup.html"
+  }
+}

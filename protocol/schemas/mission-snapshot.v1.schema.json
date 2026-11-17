@@ -1,0 +1,32 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://schemas.velia.local/mission-snapshot.v1.schema.json",
+  "title": "Velia mission snapshot v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema",
+    "missionId",
+    "revision",
+    "origin",
+    "state",
+    "currentRequest",
+    "requirementCount",
+    "createdAtUtc",
+    "updatedAtUtc"
+  ],
+  "properties": {
+    "schema": { "const": "velia-mission-snapshot/v1" },
+    "missionId": { "type": "string", "format": "uuid" },
+    "revision": { "type": "integer", "minimum": 1 },
+    "origin": { "enum": ["voice", "text", "live", "system"] },
+    "state": {
+      "enum": ["accepted", "running", "awaitingInput", "correcting", "completed", "failed", "cancelled"]
+    },
+    "currentRequest": { "type": "string", "minLength": 1, "maxLength": 32768 },
+    "requirementCount": { "type": "integer", "minimum": 1, "maximum": 1024 },
+    "createdAtUtc": { "type": "string", "format": "date-time" },
+    "updatedAtUtc": { "type": "string", "format": "date-time" },
+    "message": { "type": "string", "minLength": 1, "maxLength": 4096 }
+  }
+}

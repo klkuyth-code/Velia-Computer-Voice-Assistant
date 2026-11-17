@@ -1,0 +1,15 @@
+node_modules/
+dist-electron/
+dist-renderer/
+release/
+artifacts/
+coverage/
+*.log
+.env
+.env.*
+!.env.example
+*.pem
+*.pfx
+*.key
+*.vlic
+*.vreq

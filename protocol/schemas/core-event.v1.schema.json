@@ -1,0 +1,86 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://schemas.velia.local/core-event.v1.schema.json",
+  "title": "Velia Core event v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema", "operationId", "sequence", "atUtc", "type", "origin"],
+  "properties": {
+    "schema": { "const": "velia-core-event/v1" },
+    "operationId": { "type": "string", "format": "uuid" },
+    "sequence": { "type": "integer", "minimum": 1 },
+    "atUtc": { "type": "string", "format": "date-time" },
+    "type": { "enum": ["accepted", "state", "reasoning", "content", "tool", "completed", "failed", "cancelled", "mission", "notification"] },
+    "origin": { "enum": ["voice", "text", "live", "system"] },
+    "state": { "enum": ["accepted", "thinking", "responding"] },
+    "delta": { "type": "string", "minLength": 1, "maxLength": 1048576 },
+    "toolCall": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["index", "id", "name", "argumentsFragment"],
+      "properties": {
+        "index": { "type": "integer", "minimum": 0, "maximum": 255 },
+        "id": { "type": "string", "minLength": 1, "maxLength": 256 },
+        "name": { "type": "string", "minLength": 1, "maxLength": 64 },
+        "argumentsFragment": { "type": "string", "maxLength": 65536 }
+      }
+    },
+    "finishReason": { "type": "string", "minLength": 1, "maxLength": 80 },
+    "usage": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["promptTokens", "completionTokens", "totalTokens"],
+      "properties": {
+        "promptTokens": { "type": "integer", "minimum": 0 },
+        "completionTokens": { "type": "integer", "minimum": 0 },
+        "totalTokens": { "type": "integer", "minimum": 0 }
+      }
+    },
+    "error": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["code", "message", "retryable"],
+      "properties": {
+        "code": { "type": "string", "minLength": 1, "maxLength": 80 },
+        "message": { "type": "string", "minLength": 1, "maxLength": 500 },
+        "retryable": { "type": "boolean" },
+        "details": { "type": "object" }
+      }
+    },
+    "mission": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["schema", "missionId", "revision", "origin", "state", "currentRequest", "requirementCount", "createdAtUtc", "updatedAtUtc"],
+      "properties": {
+        "schema": { "const": "velia-mission-snapshot/v1" },
+        "missionId": { "type": "string", "format": "uuid" },
+        "revision": { "type": "integer", "minimum": 1 },
+        "origin": { "enum": ["voice", "text", "live", "system"] },
+        "state": { "enum": ["accepted", "running", "awaitingInput", "correcting", "completed", "failed", "cancelled"] },
+        "currentRequest": { "type": "string", "minLength": 1, "maxLength": 32768 },
+        "requirementCount": { "type": "integer", "minimum": 1, "maximum": 1024 },
+        "createdAtUtc": { "type": "string", "format": "date-time" },
+        "updatedAtUtc": { "type": "string", "format": "date-time" },
+        "message": { "type": "string", "minLength": 1, "maxLength": 4096 }
+      }
+    },
+    "notification": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["kind", "title", "message"],
+      "properties": {
+        "kind": { "const": "timerElapsed" },
+        "title": { "type": "string", "minLength": 1, "maxLength": 80 },
+        "message": { "type": "string", "minLength": 1, "maxLength": 200 }
+      }
+    }
+  },
+  "allOf": [
+    { "if": { "properties": { "type": { "const": "state" } }, "required": ["type"] }, "then": { "properties": { "state": true }, "required": ["state"] } },
+    { "if": { "properties": { "type": { "const": "content" } }, "required": ["type"] }, "then": { "properties": { "delta": true }, "required": ["delta"] } },
+    { "if": { "properties": { "type": { "const": "tool" } }, "required": ["type"] }, "then": { "properties": { "toolCall": true }, "required": ["toolCall"] } },
+    { "if": { "properties": { "type": { "const": "failed" } }, "required": ["type"] }, "then": { "properties": { "error": true }, "required": ["error"] } },
+    { "if": { "properties": { "type": { "const": "mission" } }, "required": ["type"] }, "then": { "properties": { "mission": true }, "required": ["mission"] } },
+    { "if": { "properties": { "type": { "const": "notification" } }, "required": ["type"] }, "then": { "properties": { "notification": true }, "required": ["notification"] } }
+  ]
+}

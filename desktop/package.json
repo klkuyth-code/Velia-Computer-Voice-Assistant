@@ -1,0 +1,117 @@
+{
+  "name": "velia-desktop",
+  "version": "0.1.0",
+  "private": true,
+  "license": "SEE LICENSE IN LICENSE",
+  "description": "Velia Windows desktop assistant",
+  "author": "Velia",
+  "type": "module",
+  "main": "dist-electron/main.js",
+  "scripts": {
+    "build:protocol": "pnpm --dir ../protocol run build",
+    "build:browser-extension": "pnpm --dir ../browser-extension run build",
+    "build:core": "node ./scripts/build-core.mjs",
+    "prepare:wake": "powershell -NoProfile -ExecutionPolicy Bypass -File ./scripts/prepare-wake-runtime.ps1",
+    "build:main": "tsc -p tsconfig.electron.json",
+    "build:renderer": "vite build",
+    "build": "node ./scripts/clean-build.mjs && pnpm run build:protocol && pnpm run build:browser-extension && pnpm run build:main && pnpm run build:renderer",
+    "test": "vitest run",
+    "check": "pnpm run build && pnpm run test",
+    "smoke:ui": "electron dist-electron/smoke.js",
+    "start": "electron .",
+    "package:dir": "pnpm run build && pnpm run build:core && pnpm run prepare:wake && node ./scripts/ensure-electron.mjs && electron-builder --dir && node ./scripts/verify-package.mjs release/win-unpacked/resources/app.asar",
+    "package:win": "pnpm run build && pnpm run build:core && pnpm run prepare:wake && node ./scripts/ensure-electron.mjs && node ./scripts/build-windows-installer.mjs && node ./scripts/verify-package.mjs release/win-unpacked/resources/app.asar"
+  },
+  "dependencies": {
+    "@velia/protocol": "link:../protocol",
+    "lucide-react": "1.31.0",
+    "mammoth": "1.12.1",
+    "node-edge-tts": "1.2.10",
+    "pdf-parse": "2.4.5",
+    "react": "19.2.8",
+    "react-dom": "19.2.8",
+    "ws": "8.21.3"
+  },
+  "devDependencies": {
+    "@electron/asar": "3.4.1",
+    "@testing-library/react": "16.3.2",
+    "@types/node": "26.2.0",
+    "@types/react": "19.2.18",
+    "@types/react-dom": "19.2.4",
+    "@types/ws": "8.18.1",
+    "@vitejs/plugin-react": "6.0.5",
+    "electron": "43.3.0",
+    "electron-builder": "26.15.3",
+    "jsdom": "30.0.1",
+    "typescript": "7.0.2",
+    "vite": "8.2.1",
+    "vitest": "4.1.10"
+  },
+  "engines": {
+    "node": ">=24"
+  },
+  "build": {
+    "appId": "com.velia.desktop",
+    "productName": "Velia",
+    "electronDist": "node_modules/electron/dist",
+    "asar": true,
+    "directories": {
+      "output": "release"
+    },
+    "files": [
+      "dist-electron/**/*",
+      "!dist-electron/smoke.js",
+      "dist-renderer/**/*",
+      "build/icon.ico",
+      "build/tray-icon.png",
+      "package.json",
+      "LICENSE",
+      "THIRD_PARTY_NOTICES.md",
+      "!**/*.map",
+      "!node_modules/@velia/protocol/**/*",
+      "node_modules/@velia/protocol/package.json",
+      "node_modules/@velia/protocol/dist/*.js"
+    ],
+    "extraResources": [
+      {
+        "from": "../core/artifacts/win-x64",
+        "to": "core",
+        "filter": [
+          "Velia.Core.exe"
+        ]
+      },
+      {
+        "from": "../browser-extension/dist",
+        "to": "browser-extension",
+        "filter": [
+          "**/*"
+        ]
+      },
+      {
+        "from": "../.tools/wake-word",
+        "to": "wake-word",
+        "filter": [
+          "*.exe",
+          "*.dll",
+          "ggml-base.bin",
+          "*.txt",
+          "RUNTIME-MANIFEST.json"
+        ]
+      }
+    ],
+    "win": {
+      "icon": "build/icon.ico",
+      "target": [
+        "nsis"
+      ],
+      "artifactName": "Velia-Setup-${version}-${arch}.${ext}"
+    },
+    "nsis": {
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true,
+      "deleteAppDataOnUninstall": false,
+      "createDesktopShortcut": true,
+      "createStartMenuShortcut": true
+    }
+  }
+}

@@ -1,0 +1,1258 @@
+:root {
+  color-scheme: dark;
+  background: #062126;
+}
+
+body { background: #062126; }
+
+html:not(.assistant-view) body {
+  padding-top: 42px;
+  background: #07182f;
+}
+
+html:not(.assistant-view) body::before {
+  content: 'Velia';
+  position: fixed;
+  z-index: 2147483646;
+  top: 0;
+  right: 138px;
+  left: 0;
+  display: flex;
+  align-items: center;
+  height: 42px;
+  padding-left: 46px;
+  color: #dbeafe;
+  background:
+    url('./assets/velia-life-orb.png') 14px center / 23px 23px no-repeat,
+    linear-gradient(90deg, #07182f 0%, #0a2444 48%, #07182f 100%);
+  font-size: 13px;
+  font-weight: 650;
+  letter-spacing: .01em;
+  user-select: none;
+  -webkit-app-region: drag;
+}
+
+html:not(.assistant-view) body::after {
+  content: '';
+  position: fixed;
+  z-index: 2147483647;
+  top: 41px;
+  right: 0;
+  left: 0;
+  height: 1px;
+  pointer-events: none;
+  background: linear-gradient(90deg, rgba(56, 189, 248, .18), rgba(34, 211, 238, .5), rgba(167, 139, 250, .24));
+  box-shadow: 0 1px 8px rgba(34, 211, 238, .18);
+}
+
+.velia-control {
+  --velia-deep: #08272a;
+  --velia-deeper: #041b20;
+  --velia-shell: rgba(9, 38, 42, .94);
+  --velia-panel: rgba(16, 61, 64, .72);
+  --velia-panel-strong: rgba(19, 72, 74, .9);
+  --velia-text: #e7fbf8;
+  --velia-muted: #8fb8b5;
+  --velia-line: rgba(137, 238, 226, .13);
+  --velia-primary: #41b8ad;
+  --velia-cyan: #83e6d8;
+  --velia-gold: #d8bf77;
+  position: relative;
+  display: grid;
+  grid-template-columns: 218px minmax(0, 1fr);
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  color: var(--velia-text);
+  background:
+    radial-gradient(ellipse at 78% -8%, rgba(91, 210, 194, .17), transparent 39%),
+    radial-gradient(ellipse at 3% 100%, rgba(216, 191, 119, .09), transparent 31%),
+    linear-gradient(145deg, #123e42, #09272a 74%);
+  isolation: isolate;
+}
+
+.velia-control::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: -2;
+  opacity: .23;
+  background-image:
+    linear-gradient(rgba(116, 231, 218, .04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(116, 231, 218, .04) 1px, transparent 1px);
+  background-size: 42px 42px;
+  mask-image: linear-gradient(to bottom, #000, transparent 92%);
+}
+
+.velia-control__ambient {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.velia-control__ambient i {
+  position: absolute;
+  width: 300px;
+  height: 300px;
+  border-radius: 50%;
+  opacity: .16;
+  filter: blur(72px);
+  background: #5cdecf;
+  animation: velia-ambient-drift 14s ease-in-out infinite alternate;
+}
+
+.velia-control__ambient i:nth-child(1) { left: 14%; top: -24%; }
+.velia-control__ambient i:nth-child(2) { right: 3%; top: 25%; width: 220px; height: 220px; background: #4088a0; animation-delay: -4s; }
+.velia-control__ambient i:nth-child(3) { left: 42%; bottom: -37%; width: 360px; height: 360px; background: #c3aa65; animation-delay: -7s; }
+.velia-control__ambient i:nth-child(4) { right: -12%; bottom: -22%; background: #39a899; animation-delay: -10s; }
+
+@keyframes velia-ambient-drift {
+  to { transform: translate3d(34px, 28px, 0) scale(1.16); }
+}
+
+.velia-sidebar {
+  position: relative;
+  z-index: 4;
+  display: flex;
+  min-height: 0;
+  min-width: 0;
+  flex-direction: column;
+  overflow: clip;
+  padding: 21px 14px 17px;
+  border-right: 1px solid var(--velia-line);
+  background: rgba(10, 43, 47, .82);
+  backdrop-filter: blur(25px) saturate(120%);
+}
+
+.velia-brand {
+  display: flex;
+  align-items: center;
+  flex: 0 0 auto;
+  gap: 11px;
+  padding: 0 8px 23px;
+}
+
+.velia-brand strong {
+  font-size: 20px;
+  font-weight: 600;
+  letter-spacing: .02em;
+}
+
+.velia-navigation {
+  display: grid;
+  flex: 0 0 auto;
+  gap: 7px;
+}
+
+.velia-nav-button {
+  --button-x: 18%;
+  position: relative;
+  display: grid;
+  grid-template-columns: 29px minmax(0, 1fr) 14px;
+  align-items: center;
+  width: 100%;
+  min-height: 51px;
+  overflow: hidden;
+  padding: 0 12px;
+  color: #8fb8b5;
+  border: 1px solid transparent;
+  border-radius: 15px;
+  background: rgba(102, 227, 216, .018);
+  text-align: left;
+  cursor: pointer;
+  transform: translateX(0);
+  transition: color .22s ease, transform .22s ease, border-color .22s ease, background .22s ease;
+}
+
+.velia-nav-button::before {
+  content: '';
+  position: absolute;
+  inset: 4px;
+  opacity: 0;
+  border-radius: 12px;
+  background:
+    radial-gradient(circle at var(--button-x) 50%, rgba(117, 239, 226, .24), transparent 34%),
+    linear-gradient(90deg, rgba(62, 195, 184, .14), rgba(35, 83, 95, .035));
+  transform: scaleX(.72);
+  transform-origin: left center;
+  transition: opacity .24s ease, transform .36s cubic-bezier(.2,.8,.2,1);
+}
+
+.velia-nav-button::after {
+  content: '';
+  position: absolute;
+  left: -24%;
+  top: 0;
+  width: 21%;
+  height: 100%;
+  opacity: 0;
+  background: linear-gradient(90deg, transparent, rgba(190, 255, 248, .32), transparent);
+  transform: skewX(-18deg);
+}
+
+.velia-nav-button:hover,
+.velia-nav-button:focus-visible,
+.velia-nav-button[aria-current='page'] {
+  color: #effffc;
+  border-color: rgba(130, 236, 224, .1);
+  background: rgba(91, 212, 202, .045);
+  transform: translateX(3px);
+}
+
+.velia-nav-button:hover::before,
+.velia-nav-button:focus-visible::before,
+.velia-nav-button[aria-current='page']::before {
+  opacity: 1;
+  transform: scaleX(1);
+}
+
+.velia-nav-button:hover::after,
+.velia-nav-button:focus-visible::after {
+  opacity: 1;
+  animation: velia-film-sweep .76s ease forwards;
+}
+
+@keyframes velia-film-sweep { to { left: 118%; } }
+
+.velia-nav-button > * { position: relative; z-index: 1; }
+.velia-nav-icon {
+  display: grid;
+  place-items: center;
+  width: 28px;
+  height: 28px;
+  border-radius: 10px;
+  color: #78b7b2;
+  background: rgba(102, 229, 217, .035);
+  transition: color .18s ease, filter .18s ease, transform .26s ease, background .18s ease;
+}
+
+.velia-nav-button:hover .velia-nav-icon,
+.velia-nav-button:focus-visible .velia-nav-icon,
+.velia-nav-button[aria-current='page'] .velia-nav-icon {
+  color: #aafff5;
+  background: rgba(104, 237, 223, .1);
+  filter: drop-shadow(0 0 7px rgba(95, 229, 218, .72));
+  transform: scale(1.06);
+}
+
+.velia-nav-arrow { justify-self: end; color: var(--velia-cyan); }
+
+.velia-provider-summary {
+  display: grid;
+  min-height: 0;
+  max-height: 190px;
+  flex: 0 1 auto;
+  gap: 2px;
+  margin-top: auto;
+  overflow-x: hidden;
+  overflow-y: auto;
+  padding: 14px;
+  border: 1px solid rgba(133, 232, 221, .1);
+  border-radius: 18px;
+  background: rgba(17, 65, 68, .5);
+  box-shadow: inset 0 1px 0 rgba(234, 255, 252, .035);
+  scrollbar-gutter: stable;
+  scrollbar-color: rgba(124, 222, 211, .18) transparent;
+}
+.velia-provider-summary::-webkit-scrollbar { width: 5px; }
+.velia-provider-summary::-webkit-scrollbar-track { background: transparent; }
+.velia-provider-summary::-webkit-scrollbar-thumb { border-radius: 999px; background: rgba(124, 222, 211, .2); }
+
+.velia-provider-summary > span {
+  margin-bottom: 8px;
+  color: #78a39f;
+  font-size: 10px;
+  letter-spacing: .08em;
+}
+
+.velia-provider-summary > div {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  min-height: 25px;
+}
+
+.velia-provider-summary strong { font-size: 10px; font-weight: 550; }
+.velia-provider-summary em {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  color: #718e8c;
+  font-size: 9px;
+  font-style: normal;
+}
+.velia-provider-summary em i,
+.velia-api-card__head > span i {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: currentColor;
+}
+.velia-provider-summary em.is-ready,
+.velia-api-card__head > span.is-ready { color: #71e4bd; }
+.velia-provider-summary em.is-ready i { box-shadow: 0 0 8px currentColor; }
+
+.velia-main {
+  position: relative;
+  z-index: 2;
+  display: grid;
+  grid-template-rows: auto minmax(0, 1fr);
+  min-width: 0;
+  height: 100%;
+  padding: 24px 27px 96px;
+  container-name: velia-content;
+  container-type: inline-size;
+}
+
+.velia-main-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  padding: 0 3px 17px;
+}
+
+.velia-main-header h1 {
+  margin: 0;
+  font-size: 24px;
+  font-weight: 600;
+  letter-spacing: -.025em;
+}
+.velia-main-header p { margin: 6px 0 0; color: var(--velia-muted); font-size: 11px; }
+.velia-core-state {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  min-height: 30px;
+  padding: 0 11px;
+  color: #8bb3af;
+  border: 1px solid var(--velia-line);
+  border-radius: 999px;
+  background: rgba(18, 66, 69, .5);
+  font-size: 10px;
+}
+.velia-core-state i { width: 6px; height: 6px; border-radius: 50%; background: #698481; }
+.velia-core-state i.is-online { background: #6de7bd; box-shadow: 0 0 9px rgba(109, 231, 189, .78); }
+
+.velia-error-banner {
+  position: absolute;
+  z-index: 12;
+  top: 76px;
+  right: 28px;
+  left: 28px;
+  padding: 11px 14px;
+  color: #ffc6c6;
+  border: 1px solid rgba(255, 124, 124, .22);
+  border-radius: 12px;
+  background: rgba(94, 25, 32, .82);
+  backdrop-filter: blur(18px);
+}
+
+.velia-page {
+  min-width: 0;
+  min-height: 0;
+  overflow: auto;
+  padding: 0 8px 16px 3px;
+  overscroll-behavior: contain;
+  scrollbar-gutter: stable;
+  scrollbar-color: rgba(124, 222, 211, .22) transparent;
+}
+.velia-page::-webkit-scrollbar { width: 8px; height: 8px; }
+.velia-page::-webkit-scrollbar-track { background: transparent; }
+.velia-page::-webkit-scrollbar-thumb { border: 2px solid transparent; border-radius: 999px; background: rgba(122, 222, 210, .22); background-clip: padding-box; }
+.velia-page::-webkit-scrollbar-thumb:hover { background: rgba(122, 222, 210, .38); background-clip: padding-box; }
+
+.velia-consciousness {
+  position: relative;
+  display: grid;
+  place-items: center;
+  min-height: 100%;
+  overflow: hidden;
+  padding: clamp(28px, 4.6vh, 54px) clamp(24px, 4vw, 64px);
+  border: 1px solid var(--velia-line);
+  border-radius: 28px;
+  background:
+    radial-gradient(circle at 50% 43%, rgba(67, 184, 173, .15), transparent 36%),
+    radial-gradient(circle at 46% 39%, rgba(84, 126, 216, .08), transparent 24%),
+    radial-gradient(circle at 55% 48%, rgba(207, 121, 193, .055), transparent 27%),
+    linear-gradient(145deg, rgba(16, 61, 64, .78), rgba(7, 33, 38, .76));
+  box-shadow: inset 0 1px 0 rgba(234, 255, 252, .04), 0 24px 60px rgba(1, 15, 20, .2);
+}
+
+.velia-consciousness::after {
+  content: '';
+  position: absolute;
+  left: 50%;
+  bottom: 11%;
+  width: min(620px, 70%);
+  height: 74px;
+  border-radius: 50%;
+  opacity: .29;
+  background: radial-gradient(ellipse, rgba(58, 192, 179, .28), rgba(75, 124, 218, .09) 42%, transparent 70%);
+  filter: blur(30px);
+  transform: translateX(-50%);
+}
+
+.velia-consciousness__visual {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  width: 100%;
+  min-height: min(670px, calc(100vh - 190px));
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: clamp(22px, 3.2vh, 34px);
+  text-align: center;
+}
+
+.velia-particle-field {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  overflow: hidden;
+  pointer-events: none;
+}
+.velia-particle {
+  --particle-color-a: #70f2e4;
+  --particle-color-b: #4caeff;
+  --particle-color-c: #9c83ff;
+  --particle-layer-opacity: .62;
+  --particle-blur: 0px;
+  position: absolute;
+  left: var(--particle-x);
+  top: var(--particle-y);
+  width: var(--particle-size);
+  height: var(--particle-size);
+  border-radius: 50%;
+  color: var(--particle-color-a);
+  background: currentColor;
+  box-shadow: 0 0 calc(var(--particle-size) * 3.4) currentColor;
+  will-change: transform, opacity, filter, color;
+  animation:
+    velia-particle-drift var(--particle-duration) cubic-bezier(.45, 0, .55, 1) infinite,
+    velia-particle-chroma var(--particle-color-duration) ease-in-out infinite alternate;
+  animation-delay: var(--particle-delay), calc(var(--particle-delay) * .73);
+}
+.velia-particle--layer-0 { --particle-layer-opacity: .34; --particle-blur: .65px; }
+.velia-particle--layer-1 { --particle-layer-opacity: .61; --particle-blur: .2px; }
+.velia-particle--layer-2 { --particle-layer-opacity: .9; --particle-blur: 0px; }
+.velia-particle--tone-0 { --particle-color-a: #6ff8ea; --particle-color-b: #51b7ff; --particle-color-c: #a68cff; }
+.velia-particle--tone-1 { --particle-color-a: #4ca8ff; --particle-color-b: #9b7eff; --particle-color-c: #f08bcf; }
+.velia-particle--tone-2 { --particle-color-a: #aa82ff; --particle-color-b: #ef83ca; --particle-color-c: #68dff1; }
+.velia-particle--tone-3 { --particle-color-a: #ffb45e; --particle-color-b: #ff7f9e; --particle-color-c: #7edff2; }
+.velia-particle--tone-4 { --particle-color-a: #79e7ff; --particle-color-b: #6cf3cd; --particle-color-c: #ffc76e; }
+
+@keyframes velia-particle-drift {
+  0%, 100% { opacity: calc(var(--particle-layer-opacity) * .48); transform: translate3d(calc(var(--particle-drift-x) * -.35), calc(var(--particle-drift-y) * .2), 0) scale(.72); }
+  24% { opacity: var(--particle-layer-opacity); transform: translate3d(var(--particle-drift-x), calc(var(--particle-drift-y) * -.42), 0) scale(1.18); }
+  52% { opacity: calc(var(--particle-layer-opacity) * .68); transform: translate3d(calc(var(--particle-drift-x) * .35), var(--particle-drift-y), 0) scale(.88); }
+  76% { opacity: var(--particle-layer-opacity); transform: translate3d(calc(var(--particle-drift-x) * -.78), calc(var(--particle-drift-y) * -.34), 0) scale(1.34); }
+}
+@keyframes velia-particle-chroma {
+  0% { color: var(--particle-color-a); filter: blur(var(--particle-blur)) brightness(.92); }
+  48% { color: var(--particle-color-b); filter: blur(var(--particle-blur)) brightness(1.18); }
+  100% { color: var(--particle-color-c); filter: blur(var(--particle-blur)) brightness(1.04); }
+}
+
+.velia-consciousness__status {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  margin-top: 18px;
+  color: #abd6d1;
+  font-size: 11px;
+}
+.velia-consciousness__status i { width: 6px; height: 6px; border-radius: 50%; background: #70e5bd; box-shadow: 0 0 10px currentColor; }
+
+.velia-consciousness__copy { position: relative; z-index: 2; display: grid; justify-items: center; max-width: min(950px, 92%); }
+.velia-consciousness__copy h2 { margin: 0; font-size: clamp(28px, 3vw, 46px); font-weight: 600; line-height: 1.18; letter-spacing: -.042em; text-wrap: balance; }
+.velia-consciousness__copy p { margin: 13px 0 0; color: #95bbb8; font-size: clamp(12px, 1.05vw, 15px); letter-spacing: .025em; }
+.velia-consciousness .velia-life-orb { width: clamp(270px, 25vw, 342px); height: clamp(270px, 25vw, 342px); }
+
+.velia-life-orb {
+  position: relative;
+  display: grid;
+  place-items: center;
+  width: 270px;
+  height: 270px;
+  flex: 0 0 auto;
+}
+.velia-life-orb__halo {
+  position: absolute;
+  inset: 7%;
+  border-radius: 50%;
+  opacity: .42;
+  background: conic-gradient(from 30deg, #72e7d5, #318895, #d6bc73, #45b7aa, #72e7d5);
+  filter: blur(28px);
+  animation: velia-orb-spin 12s linear infinite;
+}
+.velia-life-orb__ring { position: absolute; border: 1px solid rgba(130, 234, 222, .19); border-radius: 50%; }
+.velia-life-orb__ring--one { inset: 2%; animation: velia-orb-spin 18s linear infinite; }
+.velia-life-orb__ring--two { inset: 14%; border-style: dashed; animation: velia-orb-spin 12s linear infinite reverse; }
+.velia-life-orb__ring::after { content: ''; position: absolute; top: 7%; left: 18%; width: 7px; height: 7px; border-radius: 50%; background: #8af0e2; box-shadow: 0 0 15px currentColor; }
+.velia-life-orb__surface {
+  position: absolute;
+  inset: 7%;
+  display: grid;
+  place-items: center;
+  overflow: visible;
+  border: 0;
+  border-radius: 50%;
+  background: transparent;
+  box-shadow: none;
+  animation: velia-orb-breathe 3.4s ease-in-out infinite;
+}
+.velia-life-orb__surface img { display: block; width: 100%; height: 100%; object-fit: contain; pointer-events: none; user-select: none; filter: drop-shadow(0 16px 28px rgba(0, 11, 26, .38)) drop-shadow(0 0 18px rgba(53, 190, 255, .2)); }
+.velia-life-orb--compact { width: 40px; height: 40px; }
+.velia-life-orb--compact .velia-life-orb__ring { display: none; }
+.velia-life-orb--compact .velia-life-orb__halo { inset: 3px; filter: blur(8px); }
+.velia-life-orb--compact .velia-life-orb__surface { inset: 0; }
+.velia-life-orb--compact .velia-life-orb__surface img { filter: drop-shadow(0 4px 8px rgba(0, 11, 26, .36)) drop-shadow(0 0 7px rgba(59, 192, 255, .24)); }
+
+@keyframes velia-orb-spin { to { transform: rotate(360deg); } }
+@keyframes velia-orb-breathe { 50% { transform: scale(1.055); filter: brightness(1.12); } }
+
+.velia-models-page { display: grid; gap: 16px; }
+.velia-api-overview {
+  padding: 20px;
+  border: 1px solid var(--velia-line);
+  border-radius: 22px;
+  background: linear-gradient(145deg, rgba(17, 65, 68, .8), rgba(8, 37, 43, .72));
+  box-shadow: inset 0 1px 0 rgba(230, 255, 251, .035);
+}
+.velia-api-overview > header { display: flex; align-items: flex-start; justify-content: space-between; }
+.velia-api-overview > header span { color: #75a6a1; font-size: 9px; letter-spacing: .15em; }
+.velia-api-overview > header h2 { margin: 5px 0 0; font-size: 18px; }
+.velia-api-overview > header svg { color: #7adccb; }
+.velia-api-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 10px; margin-top: 16px; }
+.velia-api-card { min-width: 0; padding: 14px; border: 1px solid rgba(131, 231, 220, .1); border-radius: 16px; background: rgba(8, 39, 45, .45); }
+.velia-api-card__head { display: flex; align-items: center; justify-content: space-between; gap: 8px; }
+.velia-api-card__head strong { overflow: hidden; font-size: 11px; text-overflow: ellipsis; white-space: nowrap; }
+.velia-api-card__head > span { display: inline-flex; align-items: center; gap: 5px; flex: 0 0 auto; color: #718d8a; font-size: 8px; }
+.velia-api-card p { min-height: 30px; margin: 9px 0 11px; color: #769d99; font-size: 9px; line-height: 1.55; }
+.velia-api-card > div:last-child { display: flex; align-items: center; gap: 6px; }
+.velia-api-button, .velia-api-link { min-height: 29px; color: #c7ebe6; border: 1px solid rgba(132, 233, 222, .13); border-radius: 9px; background: rgba(78, 183, 174, .08); cursor: pointer; font-size: 9px; }
+.velia-api-button { flex: 1; }
+.velia-api-link { display: grid; place-items: center; width: 31px; padding: 0; }
+
+.velia-bottom-dock {
+  position: absolute;
+  right: 27px;
+  bottom: 24px;
+  z-index: 16;
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  padding: 6px;
+  border: 1px solid rgba(134, 232, 221, .14);
+  border-radius: 20px;
+  background: rgba(13, 51, 56, .79);
+  box-shadow: 0 17px 43px rgba(1, 14, 20, .3), inset 0 1px 0 rgba(234, 255, 252, .045);
+  backdrop-filter: blur(22px) saturate(130%);
+}
+.velia-dock-button { display: inline-flex; align-items: center; gap: 7px; min-height: 39px; padding: 0 12px; color: #b8d9d5; border: 1px solid transparent; border-radius: 13px; background: transparent; cursor: pointer; font-size: 10px; }
+
+.velia-live-capsule {
+  position: relative;
+  width: 136px;
+  height: 42px;
+  overflow: visible;
+  padding: 0;
+  color: #dffaf6;
+  border: 1px solid rgba(133, 237, 225, .2);
+  border-radius: 23px;
+  background: linear-gradient(115deg, rgba(25, 98, 97, .88), rgba(9, 48, 58, .9));
+  box-shadow: inset 0 1px 1px rgba(221, 255, 250, .12), inset 0 -1px 0 rgba(1, 15, 20, .55);
+  cursor: pointer;
+}
+.velia-live-capsule > span:last-child { position: absolute; z-index: 3; left: 48px; top: 50%; transform: translateY(-50%); white-space: nowrap; font-size: 10px; }
+.velia-live-drop { position: absolute; z-index: 2; left: 5px; top: 5px; width: 32px; height: 32px; border-radius: 52% 48% 44% 56% / 47% 44% 56% 53%; background: radial-gradient(circle at 32% 25%, #ecfffc 0 7%, #91f7ed 16%, #35b9b1 45%, #176b78 74%, #0c3442 100%); box-shadow: 0 0 23px rgba(88, 225, 213, .48), inset -4px -5px 10px rgba(3, 31, 45, .38); animation: velia-drop-morph 3.2s ease-in-out infinite alternate; }
+.velia-live-particles { position: absolute; inset: -10px; pointer-events: none; }
+.velia-live-particles i { position: absolute; left: 50%; top: 50%; width: 3px; height: 3px; border-radius: 50%; opacity: .48; background: #8deedf; box-shadow: 0 0 8px currentColor; }
+.velia-live-particles i:nth-child(1) { transform: translate(-66px, -22px); }
+.velia-live-particles i:nth-child(2) { transform: translate(-43px, 25px); }
+.velia-live-particles i:nth-child(3) { transform: translate(42px, -25px); }
+.velia-live-particles i:nth-child(4) { transform: translate(66px, 19px); }
+.velia-live-capsule:hover .velia-live-particles i { opacity: .9; animation: velia-live-particle 1.3s ease-in-out infinite alternate; }
+.velia-live-capsule:hover { border-color: rgba(151, 245, 234, .4); box-shadow: 0 0 27px rgba(73, 210, 198, .16), inset 0 1px 1px rgba(226, 255, 251, .15); }
+@keyframes velia-drop-morph { to { border-radius: 44% 56% 54% 46% / 55% 48% 52% 45%; transform: rotate(14deg); } }
+@keyframes velia-live-particle { to { opacity: 1; filter: brightness(1.3); } }
+
+.velia-magnetic-button,
+.velia-control .button,
+.velia-control .resource-link-button,
+.velia-control .composer-button {
+  --button-x: 50%;
+  --button-y: 50%;
+  --magnet-x: 0px;
+  --magnet-y: 0px;
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  transform: translate(var(--magnet-x), var(--magnet-y));
+  transition: transform .16s cubic-bezier(.2,.8,.2,1), border-color .18s ease, box-shadow .18s ease, filter .18s ease;
+}
+.velia-magnetic-button::before,
+.velia-control .button::before,
+.velia-control .resource-link-button::before,
+.velia-control .composer-button::before {
+  content: '';
+  position: absolute;
+  z-index: -1;
+  inset: -80% -28%;
+  opacity: .8;
+  background:
+    radial-gradient(circle at var(--button-x) var(--button-y), rgba(142, 242, 231, .22), transparent 28%),
+    linear-gradient(105deg, transparent 38%, rgba(195, 255, 248, .17) 49%, transparent 59%);
+  transform: translateX(-38%) rotate(4deg);
+  transition: opacity .18s ease;
+  animation: velia-internal-flow 5.2s ease-in-out infinite;
+  pointer-events: none;
+}
+.velia-magnetic-button:hover,
+.velia-magnetic-button:focus-visible,
+.velia-control .button:hover,
+.velia-control .button:focus-visible,
+.velia-control .resource-link-button:hover,
+.velia-control .resource-link-button:focus-visible {
+  border-color: rgba(144, 241, 230, .3);
+  box-shadow: 0 14px 34px rgba(1, 13, 19, .29), 0 0 24px rgba(70, 208, 196, .11), inset 0 1px 0 rgba(231, 255, 251, .09);
+  filter: brightness(1.08);
+}
+.velia-magnetic-button.is-pressed,
+.velia-control .button.is-pressed { transform: translate(var(--magnet-x), var(--magnet-y)) scale(.97); transition-duration: .07s; }
+.velia-button-ripple { position: absolute !important; z-index: 3 !important; width: 14px; height: 14px; border-radius: 50%; background: rgba(199, 255, 248, .36); pointer-events: none; transform: translate(-50%, -50%) scale(0); animation: velia-button-ripple .62s ease-out forwards; }
+@keyframes velia-internal-flow { 0%,20% { transform: translateX(-38%) rotate(4deg); } 62%,100% { transform: translateX(38%) rotate(4deg); } }
+@keyframes velia-button-ripple { 70% { opacity: .24; } 100% { opacity: 0; transform: translate(-50%, -50%) scale(14); } }
+
+.velia-modal-layer {
+  position: absolute;
+  z-index: 40;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  padding: 28px;
+  visibility: hidden;
+  opacity: 0;
+  pointer-events: none;
+  background: rgba(3, 20, 24, .66);
+  backdrop-filter: blur(16px);
+  transition: opacity .22s ease, visibility .22s ease;
+}
+.velia-modal-layer.is-open { visibility: visible; opacity: 1; pointer-events: auto; }
+.velia-modal-surface {
+  display: grid;
+  grid-template-rows: auto minmax(0, 1fr);
+  width: min(1020px, 100%);
+  max-height: calc(100vh - 56px);
+  overflow: hidden;
+  border: 1px solid rgba(143, 237, 226, .17);
+  border-radius: 25px;
+  background: linear-gradient(145deg, rgba(15, 58, 62, .98), rgba(6, 31, 37, .98));
+  box-shadow: 0 35px 100px rgba(0, 10, 16, .52), inset 0 1px 0 rgba(235, 255, 252, .055);
+  transform: translateY(10px) scale(.985);
+  transition: transform .26s cubic-bezier(.2,.8,.2,1);
+}
+.velia-modal-layer.is-open .velia-modal-surface { transform: translateY(0) scale(1); }
+.velia-modal-header { display: flex; align-items: center; justify-content: space-between; padding: 16px 19px; border-bottom: 1px solid var(--velia-line); }
+.velia-modal-header span { color: #75aaa5; font-size: 8px; letter-spacing: .16em; }
+.velia-modal-header h2 { margin: 3px 0 0; font-size: 17px; }
+.velia-modal-header button { display: grid; place-items: center; width: 32px; height: 32px; color: #99bbb8; border: 1px solid var(--velia-line); border-radius: 50%; background: rgba(111, 228, 216, .035); cursor: pointer; }
+.velia-modal-content { min-height: 0; overflow: auto; padding: 18px; }
+.velia-history-modal .velia-modal-surface { width: min(1040px, 100%); }
+.velia-live-modal .velia-modal-surface { width: min(1050px, 100%); }
+.velia-gemini-modal .velia-modal-surface { width: min(620px, 100%); }
+
+.velia-toast {
+  position: absolute;
+  z-index: 80;
+  left: 50%;
+  bottom: 82px;
+  max-width: min(520px, calc(100% - 40px));
+  padding: 10px 15px;
+  visibility: hidden;
+  opacity: 0;
+  color: #e9fffb;
+  border: 1px solid rgba(135, 236, 224, .2);
+  border-radius: 999px;
+  background: rgba(13, 61, 64, .92);
+  box-shadow: 0 15px 40px rgba(0, 10, 15, .34);
+  transform: translate(-50%, 8px);
+  transition: opacity .18s ease, transform .18s ease, visibility .18s ease;
+  font-size: 10px;
+}
+.velia-toast.is-visible { visibility: visible; opacity: 1; transform: translate(-50%, 0); }
+
+.velia-startup {
+  position: relative;
+  display: grid;
+  place-items: center;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  color: #e8fbf8;
+  background: radial-gradient(circle at 50% 25%, rgba(69, 183, 173, .16), transparent 35%), linear-gradient(145deg, #103a3e, #061f25 76%);
+}
+.velia-startup { align-content: center; gap: 15px; color: #8eb9b5; font-size: 11px; }
+
+/* The desktop-top assistant uses the same approved deep-sea identity. */
+html.assistant-view {
+  --assistant-accent-a: #47bfb1;
+  --assistant-accent-b: #80e7d8;
+  --assistant-accent-c: #3b8799;
+  --assistant-panel-bg: linear-gradient(145deg, rgba(9,43,48,.93), rgba(4,24,30,.95));
+  --assistant-panel-border: rgba(137, 235, 223, .17);
+  --assistant-panel-text: #e9fbf8;
+  --assistant-muted: #8ab4b0;
+}
+html.assistant-view .assistant-phase--recording { --assistant-accent-a: #3fd1b3; --assistant-accent-b: #8af0d9; --assistant-accent-c: #3f9eb1; }
+html.assistant-view .assistant-phase--transcribing,
+html.assistant-view .assistant-phase--thinking,
+html.assistant-view .assistant-phase--responding { --assistant-accent-a: #4aaec0; --assistant-accent-b: #d4bd76; --assistant-accent-c: #48c4b4; }
+html.assistant-view .assistant-phase--speaking { --assistant-accent-a: #3d94ac; --assistant-accent-b: #77e6d7; --assistant-accent-c: #4eb6aa; }
+html.assistant-view .assistant-phase--complete { --assistant-accent-a: #55c9ad; --assistant-accent-b: #e0c77d; --assistant-accent-c: #71e3c3; }
+html.assistant-view .assistant-phase--error { --assistant-accent-a: #e37b83; --assistant-accent-b: #e5b36f; --assistant-accent-c: #b34f68; }
+html.assistant-view .assistant-state--idle { --assistant-accent-a: #38bdf8; --assistant-accent-b: #60a5fa; --assistant-accent-c: #22d3ee; }
+html.assistant-view .assistant-state--listening { --assistant-accent-a: #22d3ee; --assistant-accent-b: #34d399; --assistant-accent-c: #38bdf8; }
+html.assistant-view .assistant-state--answering { --assistant-accent-a: #60a5fa; --assistant-accent-b: #a78bfa; --assistant-accent-c: #22d3ee; }
+html.assistant-view .assistant-orb-surface {
+  box-shadow: none;
+}
+html.assistant-view .assistant-orb-image { filter: drop-shadow(0 8px 15px rgba(0, 8, 24, .38)) drop-shadow(0 0 9px color-mix(in srgb, var(--assistant-accent-b) 45%, transparent)); }
+html.assistant-view .assistant-orb-caption { color: #d9f6f1; border-color: rgba(132, 232, 220, .16); background: rgba(7,38,44,.82); }
+html.assistant-view .assistant-caption-panel__tools button { background: rgba(108, 226, 213, .045); }
+html.assistant-view .assistant-caption-panel__tools button:hover { background: rgba(108, 226, 213, .11); }
+html.assistant-view .assistant-phase--complete .assistant-orb-surface { animation: assistant-complete-flash .72s cubic-bezier(.2,.8,.2,1) both; }
+@keyframes assistant-complete-flash { 0% { transform: scale(.9); filter: brightness(1); } 48% { transform: scale(1.08); filter: brightness(1.35); } 100% { transform: scale(1); filter: brightness(1.08); } }
+
+/* Existing functional panels adopt the approved deep-sea visual layer. */
+.velia-control .models-layout,
+.velia-control .voice-layout,
+.velia-control .browser-layout,
+.velia-control .history-layout,
+.velia-control .vision-layout,
+.velia-control .live-layout { gap: 15px; }
+
+.velia-control .model-settings-card,
+.velia-control .chat-card,
+.velia-control .voice-console-card,
+.velia-control .voice-settings-card,
+.velia-control .browser-status-card,
+.velia-control .browser-firecrawl-card,
+.velia-control .browser-setup-card,
+.velia-control .browser-policy-card,
+.velia-control .history-list-card,
+.velia-control .history-detail-card,
+.velia-control .vision-capture-card,
+.velia-control .vision-settings-card,
+.velia-control .vision-result-card,
+.velia-control .live-stage,
+.velia-control .live-details {
+  border-color: var(--velia-line);
+  border-radius: 20px;
+  background: linear-gradient(145deg, rgba(17, 65, 68, .78), rgba(7, 34, 40, .78));
+  box-shadow: inset 0 1px 0 rgba(233, 255, 252, .035), 0 20px 50px rgba(1, 14, 20, .18);
+}
+
+.velia-control .eyebrow { color: #72a29d; }
+.velia-control .section-heading > svg,
+.velia-control .section-heading__actions > svg { color: #72d9cb; }
+.velia-control .settings-copy,
+.velia-control .chat-empty p,
+.velia-control .browser-status-card p,
+.velia-control .history-empty { color: #82aaa6; }
+.velia-control .credential-help,
+.velia-control .live-notice { color: #a7ccc7; border-color: rgba(126, 232, 220, .11); background: rgba(71, 181, 171, .05); }
+.velia-control .inline-message { color: #9ed5ce; }
+.velia-control .status-badge--positive { color: #71e4bd; background: rgba(65, 204, 166, .09); }
+.velia-control .status-badge--neutral { color: #87a5a2; background: rgba(128, 166, 162, .07); }
+.velia-control .status-badge--warning { color: #e2c77d; background: rgba(226, 199, 125, .08); }
+
+.velia-control .button { border-color: rgba(130, 231, 219, .13); color: #d8f5f1; background: linear-gradient(135deg, rgba(52, 162, 153, .24), rgba(27, 88, 99, .19)); box-shadow: inset 0 1px 0 rgba(226, 255, 251, .06); }
+.velia-control .button--primary { color: #f0fffc; background: linear-gradient(125deg, #3baea4, #287d8a); box-shadow: 0 10px 26px rgba(21, 126, 120, .2), inset 0 1px 0 rgba(231, 255, 252, .12); }
+.velia-control .button--danger { color: #e7a1a6; border-color: rgba(226, 126, 135, .13); background: rgba(121, 47, 55, .13); }
+.velia-control .resource-link-button { color: #a9d9d4; border-color: rgba(133, 234, 222, .14); background: rgba(66, 170, 161, .07); }
+.velia-control .secret-field input,
+.velia-control textarea,
+.velia-control select {
+  color-scheme: dark;
+  color: #e4f7f4;
+  border-color: rgba(137, 229, 219, .13);
+  background: #0c3439;
+}
+.velia-control select { appearance: auto; }
+.velia-control select option,
+.velia-control select optgroup { color: #e4f7f4; background: #0c3439; }
+.velia-control .secret-field input:focus,
+.velia-control textarea:focus,
+.velia-control select:focus { border-color: rgba(125, 229, 216, .48); box-shadow: 0 0 0 3px rgba(74, 193, 181, .08); }
+.velia-control .segmented-control { background: rgba(3, 25, 29, .43); }
+.velia-control .segmented-control button.active { color: #e7fbf7; background: rgba(65, 184, 173, .2); }
+.velia-control .range-field input { accent-color: #51c8b9; }
+.velia-control .range-field strong { color: #87e5d8; }
+.velia-control .wake-toggle--active { color: #c6eee8; border-color: rgba(113, 231, 216, .24); background: rgba(65, 184, 173, .1); }
+.velia-control .wake-toggle--active > span { background: rgba(64, 183, 172, .72); }
+
+.velia-control .models-layout { grid-template-columns: minmax(300px, .72fr) minmax(410px, 1.28fr); min-height: 540px; }
+.velia-control .chat-card { min-height: 540px; }
+.velia-control .chat-message--user p { color: #edfffc; background: rgba(61, 172, 161, .17); }
+.velia-control .composer-button { color: #dff9f5; background: linear-gradient(135deg, #3daea4, #2c7f8b); }
+
+.velia-control .voice-layout { grid-template-columns: minmax(340px, .84fr) minmax(430px, 1.16fr); }
+.velia-control .voice-console-card { min-height: 440px; }
+.velia-control .voice-transcript { display: none; }
+.velia-control .voice-orb { color: #85e3d6; border-color: rgba(130, 234, 221, .2); background: radial-gradient(circle, rgba(65, 183, 172, .24), rgba(9, 46, 54, .22) 62%, transparent 63%); box-shadow: 0 0 48px rgba(65, 183, 172, .16), inset 0 0 30px rgba(104, 230, 216, .1); }
+
+.velia-control .browser-layout { grid-template-columns: minmax(320px, .8fr) minmax(420px, 1.2fr); }
+.velia-control .browser-status-card { grid-column: 1 / -1; }
+.velia-control .browser-firecrawl-card { grid-column: 2; grid-row: 2; }
+.velia-control .browser-setup-card { grid-column: 1; grid-row: 2; }
+.velia-control .browser-policy-card,
+.velia-control .setup-steps { display: none; }
+.velia-control .browser-status-card__icon,
+.velia-control .browser-icon { background: linear-gradient(135deg, #3aaea3, #2b7d8a); }
+
+.velia-history-modal .history-layout { min-height: 520px; }
+.velia-history-modal .history-list-card,
+.velia-history-modal .history-detail-card { min-height: 520px; }
+.velia-history-modal .history-list-item--active { border-color: rgba(128, 231, 219, .25); background: rgba(59, 175, 164, .13); }
+
+.velia-gemini-modal .vision-capture-card,
+.velia-gemini-modal .vision-result-card { display: none; }
+.velia-gemini-modal .vision-layout { display: block; }
+.velia-gemini-modal .vision-side-stack { display: block; }
+.velia-gemini-modal .vision-settings-card { width: 100%; }
+
+.velia-live-modal .live-layout { min-height: 0; grid-template-columns: minmax(390px, 1.1fr) minmax(330px, .9fr); }
+.velia-live-modal .live-stage,
+.velia-live-modal .live-details { min-height: 520px; }
+.velia-live-modal .live-orb { color: #83e5d7; border-color: rgba(126, 232, 219, .22); background: radial-gradient(circle at 38% 30%, rgba(255,255,255,.11), transparent 24%), radial-gradient(circle, rgba(61, 180, 169, .28), rgba(8, 44, 53, .15) 62%, transparent 63%); box-shadow: 0 0 55px rgba(60, 181, 169, .18), inset 0 0 34px rgba(73, 198, 186, .12); }
+
+.velia-control button:focus-visible,
+.velia-control input:focus-visible,
+.velia-control textarea:focus-visible,
+.velia-control select:focus-visible { outline: 2px solid rgba(151, 245, 234, .78); outline-offset: 2px; }
+
+@media (max-width: 1080px) {
+  .velia-control { grid-template-columns: 204px minmax(0, 1fr); }
+  .velia-main { padding-right: 20px; padding-left: 20px; }
+  .velia-consciousness { padding-right: 24px; padding-left: 24px; }
+  .velia-consciousness .velia-life-orb { width: clamp(250px, 31vw, 310px); height: clamp(250px, 31vw, 310px); }
+  .velia-api-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .velia-control .models-layout,
+  .velia-control .voice-layout,
+  .velia-control .browser-layout { grid-template-columns: 1fr; }
+  .velia-control .browser-firecrawl-card,
+  .velia-control .browser-setup-card { grid-column: auto; grid-row: auto; }
+}
+
+@container velia-content (max-width: 1000px) {
+  .velia-main-header { padding-bottom: 13px; }
+  .velia-models-page { gap: 12px; }
+  .velia-api-overview { padding: 16px; }
+  .velia-api-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; margin-top: 12px; }
+  .velia-api-card { padding: 12px; }
+  .velia-api-card p { min-height: 24px; margin: 7px 0 9px; }
+  .velia-control .models-layout { grid-template-columns: minmax(280px, .9fr) minmax(350px, 1.1fr); gap: 12px; min-height: 0; }
+  .velia-control .voice-layout { grid-template-columns: minmax(300px, .9fr) minmax(360px, 1.1fr); gap: 12px; }
+  .velia-control .browser-layout { grid-template-columns: minmax(280px, .85fr) minmax(350px, 1.15fr); gap: 12px; }
+  .velia-control .model-settings-card,
+  .velia-control .voice-console-card,
+  .velia-control .voice-settings-card,
+  .velia-control .browser-status-card,
+  .velia-control .browser-firecrawl-card,
+  .velia-control .browser-setup-card { padding: 18px; }
+  .velia-control .settings-copy { margin-top: 14px; margin-bottom: 14px; }
+  .velia-control .profile-facts { margin-bottom: 14px; }
+  .velia-control .profile-facts div { padding-top: 8px; padding-bottom: 8px; }
+  .velia-control .chat-card { min-height: 500px; }
+  .velia-control .voice-console-card { min-height: 410px; }
+}
+
+@container velia-content (max-width: 820px) {
+  .velia-api-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .velia-control .models-layout,
+  .velia-control .voice-layout,
+  .velia-control .browser-layout { grid-template-columns: minmax(0, 1fr); }
+  .velia-control .browser-firecrawl-card,
+  .velia-control .browser-setup-card { grid-column: auto; grid-row: auto; }
+  .velia-control .model-settings-card,
+  .velia-control .chat-card,
+  .velia-control .voice-console-card,
+  .velia-control .voice-settings-card,
+  .velia-control .browser-status-card,
+  .velia-control .browser-firecrawl-card,
+  .velia-control .browser-setup-card { width: 100%; }
+  .velia-consciousness { padding-right: 20px; padding-left: 20px; }
+  .velia-consciousness .velia-life-orb { width: clamp(220px, 38cqw, 284px); height: clamp(220px, 38cqw, 284px); }
+  .velia-consciousness__copy { max-width: 96%; }
+  .velia-consciousness__copy h2 { font-size: clamp(25px, 4.5cqw, 34px); }
+}
+
+@container velia-content (max-width: 680px) {
+  .velia-api-grid { grid-template-columns: minmax(0, 1fr); }
+  .velia-main-header { gap: 10px; }
+  .velia-main-header h1 { font-size: 21px; }
+  .velia-core-state span { display: none; }
+  .velia-core-state { min-width: 30px; justify-content: center; padding: 0; }
+  .velia-dock-button { width: 40px; justify-content: center; padding: 0; }
+  .velia-dock-button span { display: none; }
+  .velia-live-capsule { width: 118px; }
+  .velia-live-capsule > span:last-child { left: 44px; }
+  .velia-consciousness__copy p { max-width: 460px; line-height: 1.65; }
+}
+
+@media (max-height: 820px) {
+  .velia-sidebar { padding-top: 15px; padding-bottom: 12px; }
+  .velia-brand { padding-bottom: 14px; }
+  .velia-navigation { gap: 5px; }
+  .velia-nav-button { min-height: 45px; }
+  .velia-provider-summary { padding: 11px 13px; }
+  .velia-provider-summary > span { margin-bottom: 4px; }
+  .velia-provider-summary > div { min-height: 21px; }
+  .velia-main { padding-top: 15px; padding-bottom: 88px; }
+  .velia-main-header { padding-bottom: 12px; }
+  .velia-main-header h1 { font-size: 21px; }
+  .velia-main-header p { margin-top: 4px; }
+  .velia-consciousness { padding-top: 22px; padding-bottom: 22px; }
+  .velia-consciousness__visual { min-height: min(540px, calc(100vh - 170px)); gap: 18px; }
+  .velia-consciousness .velia-life-orb { width: clamp(224px, 24vw, 276px); height: clamp(224px, 24vw, 276px); }
+  .velia-consciousness__copy h2 { font-size: clamp(25px, 2.8vw, 38px); }
+  .velia-consciousness__status { margin-top: 12px; }
+  .velia-api-overview { padding: 14px; }
+  .velia-api-grid { margin-top: 12px; }
+  .velia-models-page { gap: 12px; }
+  .velia-control .model-settings-card,
+  .velia-control .voice-console-card,
+  .velia-control .voice-settings-card,
+  .velia-control .browser-status-card,
+  .velia-control .browser-firecrawl-card,
+  .velia-control .browser-setup-card { padding: 17px; }
+  .velia-control .settings-copy { margin-top: 12px; margin-bottom: 12px; }
+  .velia-control .credential-help { margin-bottom: 12px; }
+  .velia-control .profile-facts { margin-bottom: 12px; }
+  .velia-control .profile-facts div { padding-top: 7px; padding-bottom: 7px; }
+  .velia-control .chat-card { min-height: 470px; }
+  .velia-control .voice-console-card { min-height: 390px; }
+  .velia-bottom-dock { bottom: 20px; }
+}
+
+@media (max-height: 700px) {
+  .velia-sidebar { padding-top: 10px; padding-bottom: 9px; }
+  .velia-brand { padding-bottom: 9px; }
+  .velia-navigation { gap: 3px; }
+  .velia-nav-button { min-height: 40px; }
+  .velia-provider-summary { margin-top: 10px; padding: 9px 11px; }
+  .velia-provider-summary > div { min-height: 19px; }
+  .velia-main { padding-top: 11px; padding-bottom: 82px; }
+  .velia-main-header { padding-bottom: 9px; }
+  .velia-consciousness__visual { min-height: min(470px, calc(100vh - 148px)); }
+  .velia-consciousness .velia-life-orb { width: clamp(196px, 23vw, 238px); height: clamp(196px, 23vw, 238px); }
+  .velia-bottom-dock { bottom: 15px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .velia-control *,
+  .velia-control *::before,
+  .velia-control *::after {
+    animation-duration: .01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: .01ms !important;
+  }
+}
+
+/* Approved v12 deep-space soft-glass UI */
+:root,
+body,
+#root { background: #01030b; }
+
+.velia-control {
+  --velia-deep: #020617;
+  --velia-deeper: #020817;
+  --velia-shell: rgba(5, 17, 40, .94);
+  --velia-panel: rgba(10, 29, 61, .57);
+  --velia-panel-strong: rgba(5, 17, 40, .92);
+  --velia-text: #f2f7ff;
+  --velia-muted: #bdcce0;
+  --velia-line: rgba(125, 211, 252, .13);
+  --velia-primary: #38bdf8;
+  --velia-cyan: #22d3ee;
+  --velia-gold: #a78bfa;
+  grid-template-columns: 232px minmax(0, 1fr);
+  grid-template-rows: minmax(0, 1fr);
+  color: var(--velia-text);
+  background:
+    radial-gradient(ellipse at 72% 5%, rgba(56, 189, 248, .14), transparent 34%),
+    radial-gradient(ellipse at 45% 96%, rgba(139, 92, 246, .12), transparent 42%),
+    linear-gradient(145deg, #07172f, #020817 78%);
+  font-family: "Microsoft YaHei UI", "Segoe UI Variable", sans-serif;
+}
+.velia-control::before { display: none; }
+.velia-control__ambient i { opacity: .14; background: #38bdf8; filter: blur(82px); }
+.velia-control__ambient i:nth-child(1) { left: 18%; top: -27%; }
+.velia-control__ambient i:nth-child(2) { right: 1%; top: 18%; background: #2563eb; }
+.velia-control__ambient i:nth-child(3) { left: 44%; bottom: -42%; background: #8b5cf6; }
+.velia-control__ambient i:nth-child(4) { right: -14%; bottom: -24%; background: #22d3ee; }
+.velia-control__stars { position: absolute; z-index: -1; inset: 0; overflow: hidden; pointer-events: none; }
+.velia-control__stars i {
+  position: absolute;
+  left: var(--shell-star-x);
+  top: var(--shell-star-y);
+  width: var(--shell-star-size);
+  height: var(--shell-star-size);
+  border-radius: 50%;
+  opacity: var(--shell-star-opacity);
+  background: #7dd3fc;
+  box-shadow: 0 0 calc(var(--shell-star-size) * 4) currentColor;
+  animation: velia-shell-star var(--shell-star-duration) ease-in-out infinite alternate;
+  animation-delay: var(--shell-star-delay);
+}
+@keyframes velia-shell-star { to { opacity: .9; transform: translate3d(4px, -5px, 0) scale(1.32); filter: brightness(1.35); } }
+
+.velia-sidebar {
+  padding: 25px 17px 19px;
+  border-right-color: rgba(148, 197, 253, .09);
+  background: linear-gradient(180deg, rgba(3, 12, 31, .9), rgba(2, 8, 24, .72));
+  box-shadow: 18px 0 45px rgba(0, 7, 26, .14);
+}
+.velia-brand { gap: 12px; padding: 0 10px 26px; }
+.velia-brand strong { color: #f7fbff; font-size: 24px; font-weight: 650; }
+.velia-brand .velia-life-orb--compact { width: 45px; height: 45px; }
+.velia-navigation { gap: 10px; }
+.velia-nav-button {
+  grid-template-columns: 28px minmax(0, 1fr) 15px;
+  min-height: 57px;
+  padding: 0 15px;
+  color: #e3edf9;
+  border-color: rgba(148, 197, 253, .11);
+  border-radius: 21px;
+  background: linear-gradient(135deg, rgba(15, 32, 63, .26), rgba(6, 18, 43, .14));
+  box-shadow: inset 0 1px 0 rgba(224, 242, 254, .025), 0 10px 30px rgba(0, 5, 20, .05);
+  font-size: 15px;
+  font-weight: 600;
+}
+.velia-nav-button:hover,
+.velia-nav-button:focus-visible { border-color: rgba(125, 211, 252, .36); background: linear-gradient(125deg, rgba(24, 57, 99, .38), rgba(8, 29, 61, .2)); box-shadow: 0 12px 32px rgba(3, 21, 50, .22), inset 0 1px 0 rgba(224, 242, 254, .05); transform: translateX(2px) translateY(-1px); }
+.velia-nav-button[aria-current='page'] { color: #f8fbff; border-color: rgba(34, 211, 238, .54); background: linear-gradient(120deg, rgba(14, 165, 233, .3), rgba(37, 99, 235, .18), rgba(139, 92, 246, .08)); box-shadow: 0 15px 38px rgba(14, 165, 233, .13), inset 0 1px 0 rgba(224, 242, 254, .1), inset 0 0 24px rgba(56, 189, 248, .06); animation: velia-nav-breathe 4.8s ease-in-out infinite; }
+.velia-nav-icon { color: #9fb3cf; background: transparent; }
+.velia-nav-button:hover .velia-nav-icon,
+.velia-nav-button:focus-visible .velia-nav-icon,
+.velia-nav-button[aria-current='page'] .velia-nav-icon { color: #67e8f9; background: rgba(56, 189, 248, .08); filter: drop-shadow(0 0 7px rgba(56, 189, 248, .55)); }
+.velia-nav-arrow { color: #7dd3fc; }
+@keyframes velia-nav-breathe { 50% { border-color: rgba(34, 211, 238, .68); box-shadow: 0 15px 42px rgba(56, 189, 248, .17), inset 0 1px 0 rgba(224, 242, 254, .1); } }
+
+.velia-provider-summary {
+  gap: 7px;
+  max-height: none;
+  padding: 16px;
+  border-color: rgba(148, 197, 253, .12);
+  border-radius: 24px;
+  background: linear-gradient(145deg, rgba(11, 29, 60, .48), rgba(4, 15, 37, .28));
+  box-shadow: 0 18px 45px rgba(0, 6, 22, .15), inset 0 1px 0 rgba(224, 242, 254, .05);
+}
+.velia-provider-summary > span { margin-bottom: 2px; color: #9db1cd; font-size: 12px; font-weight: 600; letter-spacing: 0; }
+.velia-provider-summary > div { min-height: 24px; }
+.velia-provider-summary strong { color: #e7f0fb; font-size: 12px; font-weight: 600; }
+.velia-provider-summary em { color: #7f92ae; font-size: 11px; font-weight: 600; }
+.velia-provider-summary em.is-ready { color: #8fe7ff; }
+
+.velia-main { grid-template-rows: auto minmax(0, 1fr) auto; min-height: 0; overflow: hidden; padding: 27px 28px 19px; }
+.velia-main-header { padding: 0 5px 20px; }
+.velia-main-header h1 { color: #f8fbff; font-size: 30px; font-weight: 700; text-shadow: 0 3px 18px rgba(125, 211, 252, .08); }
+.velia-main-header p { color: #c5d4e8; font-size: 13px; font-weight: 600; }
+.velia-core-state { min-height: 34px; padding: 0 14px; color: #d8ecff; border-color: rgba(125, 211, 252, .18); background: rgba(5, 18, 43, .34); box-shadow: 0 10px 28px rgba(0, 7, 25, .12), inset 0 1px 0 rgba(224, 242, 254, .05); font-size: 11px; font-weight: 600; }
+.velia-core-state i.is-online { background: #38bdf8; box-shadow: 0 0 10px #38bdf8; }
+.velia-page { overflow-anchor: none; padding: 0 4px 0 0; scrollbar-color: rgba(125, 211, 252, .26) transparent; }
+.velia-page::-webkit-scrollbar-thumb { background: rgba(125, 211, 252, .22); background-clip: padding-box; }
+
+.velia-consciousness { min-height: 100%; padding: 24px; border-color: rgba(125, 211, 252, .16); border-radius: 32px; background: #020817; box-shadow: 0 24px 75px rgba(0, 6, 24, .22), inset 0 1px 0 rgba(224, 242, 254, .045); }
+.velia-consciousness::after { display: none; }
+.velia-nebula-scene { position: absolute; z-index: 0; inset: 0; overflow: hidden; border-radius: inherit; pointer-events: none; isolation: isolate; }
+.velia-nebula-base,
+.velia-nebula-cloud { position: absolute; inset: -4%; background: url('./assets/velia-nebula-background-v1.png') center / cover no-repeat; will-change: transform, opacity, filter; }
+.velia-nebula-base { opacity: .82; filter: saturate(.92) brightness(.9); animation: velia-nebula-base-breathe 13s ease-in-out infinite alternate; }
+.velia-nebula-cloud { opacity: .34; mix-blend-mode: screen; }
+.velia-nebula-cloud--left { -webkit-mask-image: radial-gradient(ellipse 78% 110% at 4% 58%, #000 0 46%, transparent 76%); mask-image: radial-gradient(ellipse 78% 110% at 4% 58%, #000 0 46%, transparent 76%); transform-origin: 18% 55%; animation: velia-nebula-left-breathe 9.8s ease-in-out infinite; }
+.velia-nebula-cloud--right { -webkit-mask-image: radial-gradient(ellipse 78% 110% at 96% 58%, #000 0 46%, transparent 76%); mask-image: radial-gradient(ellipse 78% 110% at 96% 58%, #000 0 46%, transparent 76%); transform-origin: 84% 58%; animation: velia-nebula-right-breathe 12.4s ease-in-out infinite reverse; }
+.velia-nebula-center-glow { position: absolute; left: 50%; top: 39%; width: 52%; aspect-ratio: 1; border-radius: 50%; opacity: .46; background: radial-gradient(circle, rgba(56, 189, 248, .22), rgba(37, 99, 235, .08) 40%, transparent 70%); filter: blur(18px); transform: translate(-50%, -50%); animation: velia-nebula-center-breathe 6.8s ease-in-out infinite; }
+.velia-consciousness__visual { z-index: 2; min-height: 100%; gap: 20px; }
+.velia-particle-field { z-index: 1; transform-origin: 50% 40%; animation: velia-particle-field-breathe 5.6s ease-in-out infinite; }
+.velia-particle { --particle-layer-opacity: .62; }
+.velia-particle--tone-0 { --particle-color-a: #7dd3fc; --particle-color-b: #38bdf8; --particle-color-c: #e0f2fe; }
+.velia-particle--tone-1 { --particle-color-a: #38bdf8; --particle-color-b: #a78bfa; --particle-color-c: #22d3ee; }
+.velia-particle--tone-2 { --particle-color-a: #e0f2fe; --particle-color-b: #60a5fa; --particle-color-c: #a78bfa; }
+.velia-particle--tone-3 { --particle-color-a: #22d3ee; --particle-color-b: #7dd3fc; --particle-color-c: #f0abfc; }
+.velia-particle--tone-4 { --particle-color-a: #a78bfa; --particle-color-b: #38bdf8; --particle-color-c: #e0f2fe; }
+.velia-consciousness .velia-life-orb { width: clamp(220px, 27vw, 318px); height: clamp(220px, 27vw, 318px); }
+.velia-life-orb__halo { background: #38bdf8; opacity: .38; filter: blur(22px); }
+.velia-life-orb__ring { border-color: rgba(56, 189, 248, .18); }
+.velia-life-orb__ring--two { border-color: rgba(167, 139, 250, .17); }
+.velia-life-orb__ring::after { background: #7dd3fc; }
+.velia-life-orb__surface img { filter: drop-shadow(0 0 18px rgba(34, 211, 238, .52)) drop-shadow(0 0 40px rgba(96, 165, 250, .26)); }
+.velia-consciousness__copy { max-width: 94%; }
+.velia-consciousness__copy h2 { color: #f9fbff; font-size: clamp(29px, 3.3vw, 45px); font-weight: 700; line-height: 1.2; text-shadow: 0 5px 24px rgba(96, 165, 250, .09); }
+.velia-consciousness__copy p { margin-top: 11px; color: #c4d3e7; font-size: 14px; font-weight: 600; }
+.velia-consciousness__status { margin-top: 16px; color: #d2e6f8; font-size: 11.5px; font-weight: 600; }
+.velia-consciousness__status i { background: #38bdf8; box-shadow: 0 0 10px #38bdf8; }
+@keyframes velia-nebula-base-breathe { 0% { opacity: .76; transform: scale(1.01); filter: saturate(.88) brightness(.82); } 52% { opacity: .92; filter: saturate(1.05) brightness(1.02); } 100% { opacity: .8; transform: translate3d(-7px, 4px, 0) scale(1.035); filter: saturate(.96) brightness(.9); } }
+@keyframes velia-nebula-left-breathe { 0%,100% { opacity: .24; transform: translate3d(-8px,5px,0) scale(1.015); filter: brightness(.86) blur(.2px); } 50% { opacity: .48; transform: translate3d(9px,-5px,0) scale(1.065); filter: brightness(1.18) blur(1.1px); } }
+@keyframes velia-nebula-right-breathe { 0%,100% { opacity: .22; transform: translate3d(7px,-3px,0) scale(1.02); filter: brightness(.88) blur(.4px); } 50% { opacity: .46; transform: translate3d(-9px,6px,0) scale(1.07); filter: brightness(1.2) blur(1.2px); } }
+@keyframes velia-nebula-center-breathe { 0%,100% { opacity: .32; transform: translate(-50%,-50%) scale(.92); filter: blur(22px); } 50% { opacity: .58; transform: translate(-50%,-50%) scale(1.08); filter: blur(16px); } }
+@keyframes velia-particle-field-breathe { 0%,100% { opacity: .78; transform: scale(.985); filter: brightness(.9); } 50% { opacity: 1; transform: scale(1.022); filter: brightness(1.2); } }
+
+.velia-models-page { gap: 16px; }
+.velia-api-overview { padding: 0; border: 0; border-radius: 0; background: transparent; box-shadow: none; }
+.velia-api-overview > header { align-items: center; padding: 4px 8px 13px; }
+.velia-api-overview > header h2 { margin: 0; color: #f3f8ff; font-size: 21px; font-weight: 700; }
+.velia-api-overview > header svg { color: #67e8f9; }
+.velia-api-grid { gap: 0; margin-top: 0; padding: 11px; border: 1px solid rgba(125, 211, 252, .13); border-radius: 27px; background: linear-gradient(145deg, rgba(10, 29, 61, .58), rgba(4, 16, 40, .38)); box-shadow: 0 22px 62px rgba(0, 5, 21, .19), inset 0 1px 0 rgba(224, 242, 254, .055); }
+.velia-api-card { padding: 15px 16px; border: 0; border-radius: 0; background: transparent; }
+.velia-api-card + .velia-api-card { border-left: 1px solid rgba(148, 197, 253, .085); }
+.velia-api-card__head strong { color: #f0f6ff; font-size: 13px; font-weight: 650; }
+.velia-api-card__head > span { color: #7f92ae; font-size: 10px; font-weight: 600; }
+.velia-api-card__head > span.is-ready { color: #8fe7ff; }
+.velia-api-card p { color: #b7c7dc; font-size: 11.5px; font-weight: 600; }
+.velia-api-button,
+.velia-api-link { min-height: 38px; color: #dbeafe; border-color: rgba(147, 197, 253, .18); border-radius: 999px; background: linear-gradient(145deg, rgba(18, 41, 77, .48), rgba(7, 23, 52, .26)); box-shadow: 0 12px 30px rgba(0, 6, 23, .13), inset 0 1px 0 rgba(224, 242, 254, .055); font-size: 12px; font-weight: 650; }
+.velia-api-link { width: 38px; }
+.velia-api-card:first-child .velia-api-button { border-color: rgba(34, 211, 238, .48); background: linear-gradient(115deg, rgba(14, 165, 233, .48), rgba(37, 99, 235, .25), rgba(139, 92, 246, .12)); }
+
+.velia-control .models-layout { grid-template-columns: minmax(280px, .78fr) minmax(390px, 1.22fr); gap: 16px; min-height: 0; }
+.velia-control .model-settings-card,
+.velia-control .chat-card,
+.velia-control .voice-console-card,
+.velia-control .voice-settings-card,
+.velia-control .browser-status-card,
+.velia-control .browser-firecrawl-card,
+.velia-control .browser-setup-card { border-color: rgba(125, 211, 252, .13); border-radius: 27px; background: linear-gradient(145deg, rgba(10, 29, 61, .57), rgba(4, 16, 40, .35)); box-shadow: 0 22px 62px rgba(0, 5, 21, .18), inset 0 1px 0 rgba(224, 242, 254, .055); backdrop-filter: blur(18px) saturate(118%); }
+.velia-control .model-settings-card { padding: 22px; }
+.velia-control .chat-card { min-height: 305px; }
+.velia-control .section-heading h3,
+.velia-control .chat-card__header h3 { margin: 0; color: #f3f8ff; font-size: 19px; font-weight: 700; }
+.velia-control .eyebrow { color: #9db1cd; font-size: 11px; font-weight: 600; }
+.velia-control .settings-copy,
+.velia-control .chat-empty p,
+.velia-control .browser-status-card p { color: #bdcce0; font-size: 12.5px; font-weight: 600; line-height: 1.7; }
+.velia-control .chat-empty strong { color: #e4eef9; font-size: 14px; font-weight: 650; }
+.velia-control .chat-card__header { padding: 22px; border-bottom-color: rgba(125, 211, 252, .08); }
+.velia-control .chat-card__header > span { color: #c9b9ff; background: rgba(139, 92, 246, .1); font-size: 11px; font-weight: 600; }
+.velia-control .chat-messages { min-height: 170px; }
+.velia-control .chat-composer textarea,
+.velia-control .secret-field input { color: #eef6ff; border-color: rgba(147, 197, 253, .15); border-radius: 16px; background: rgba(2, 10, 28, .48); box-shadow: inset 0 2px 10px rgba(0, 4, 16, .16), 0 1px 0 rgba(224, 242, 254, .025); font-size: 12.5px; font-weight: 600; }
+.velia-control .secret-field > span { color: #dce8f6; font-size: 12px; font-weight: 600; }
+.velia-control .button,
+.velia-control .resource-link-button,
+.velia-control .composer-button { min-height: 40px; color: #dbeafe; border-color: rgba(147, 197, 253, .18); border-radius: 999px; background: linear-gradient(145deg, rgba(18, 41, 77, .48), rgba(7, 23, 52, .26)); box-shadow: 0 12px 30px rgba(0, 6, 23, .13), inset 0 1px 0 rgba(224, 242, 254, .055); font-size: 13px; font-weight: 650; }
+.velia-control .button--primary,
+.velia-control .composer-button { color: #f0f9ff; border-color: rgba(34, 211, 238, .48); background: linear-gradient(115deg, rgba(14, 165, 233, .48), rgba(37, 99, 235, .25), rgba(139, 92, 246, .12)); box-shadow: 0 15px 36px rgba(14, 165, 233, .16), inset 0 1px 0 rgba(224, 242, 254, .12); }
+.velia-control .button--danger { color: #fda4af; border-color: rgba(251, 113, 133, .3); background: rgba(127, 29, 29, .14); }
+.velia-control .inline-message { color: #a7dff2; font-size: 11px; font-weight: 600; }
+
+.velia-control .voice-layout { grid-template-columns: minmax(320px, .84fr) minmax(430px, 1.16fr); gap: 16px; }
+.velia-control .voice-console-card { min-height: 535px; padding: 22px; }
+.velia-control .voice-settings-stack { gap: 13px; }
+.velia-control .voice-settings-card { padding: 20px 22px; }
+.velia-control .voice-console-card .section-heading { justify-content: center; }
+.velia-control .voice-console-card .section-heading > svg { display: none; }
+.velia-control .voice-console-card > h2 { color: #f1f7ff; font-size: 18px; font-weight: 700; }
+.velia-control .voice-console-card > p { color: #bccbe0; font-size: 12.5px; font-weight: 600; }
+.velia-control .voice-orb { width: 140px; height: 140px; margin: 28px 0 14px; color: #67e8f9; border-color: rgba(34, 211, 238, .24); background: radial-gradient(circle, rgba(34, 211, 238, .1), rgba(2, 10, 28, .48) 61%); box-shadow: 0 22px 60px rgba(14, 165, 233, .11), inset 0 0 35px rgba(56, 189, 248, .055); }
+.velia-control .voice-console-card .button { width: min(250px, 100%); margin-top: 8px; }
+.voice-long-shortcut { display: grid; justify-items: center; gap: 7px; width: min(250px, 100%); margin-top: 14px; padding: 12px; color: #bfdbfe; border: 1px solid rgba(125, 211, 252, .14); border-radius: 20px; background: rgba(5, 20, 47, .3); box-shadow: inset 0 1px 0 rgba(224, 242, 254, .035); }
+.voice-long-shortcut > span { color: #afc0d7; font-size: 11px; font-weight: 600; }
+.voice-long-shortcut > strong { display: flex; align-items: center; gap: 6px; }
+.voice-long-shortcut kbd { min-width: 34px; padding: 5px 8px; color: #f1f8ff; border: 1px solid rgba(56, 189, 248, .3); border-radius: 10px; background: linear-gradient(180deg, rgba(14, 165, 233, .12), rgba(3, 13, 34, .42)); box-shadow: 0 8px 20px rgba(0, 6, 22, .12), inset 0 1px 0 rgba(224, 242, 254, .06); font-family: inherit; font-size: 13px; font-weight: 600; }
+.voice-long-shortcut b { color: #64748b; }
+.voice-long-shortcut em { color: #8fe7ff; font-size: 11px; font-style: normal; font-weight: 600; }
+.velia-control .wake-toggle { min-height: 38px; color: #c6d4e6; border-color: rgba(125, 211, 252, .15); border-radius: 999px; background: rgba(5, 20, 47, .34); font-size: 12px; }
+.velia-control .wake-toggle--active { color: #d9fbff; border-color: rgba(34, 211, 238, .35); background: rgba(14, 165, 233, .16); }
+.velia-control .wake-toggle--active > span { background: rgba(34, 211, 238, .65); }
+.velia-control .wake-runtime { color: #9fb3cf; font-size: 10px; }
+.velia-control .range-field { color: #dce8f6; font-size: 12px; font-weight: 600; }
+.velia-control .range-field strong { color: #7dd3fc; font-size: 12px; }
+.velia-control .range-field input { accent-color: #22d3ee; }
+.velia-control .voice-preview-button { width: 100%; }
+
+.voice-soft-field { display: grid; gap: 8px; margin-top: 16px; color: #dce8f6; font-size: 12px; font-weight: 600; }
+.voice-soft-select { position: relative; min-width: 0; }
+.voice-soft-select__trigger { display: flex; align-items: center; justify-content: space-between; gap: 12px; width: 100%; min-height: 46px; padding: 0 15px; color: #eef6ff; border: 1px solid rgba(147, 197, 253, .17); border-radius: 16px; background: rgba(2, 10, 28, .5); box-shadow: inset 0 2px 10px rgba(0, 4, 16, .16), 0 1px 0 rgba(224, 242, 254, .03); font-size: 12.5px; font-weight: 650; text-align: left; cursor: pointer; }
+.voice-soft-select__trigger:hover,
+.voice-soft-select__trigger[aria-expanded='true'] { border-color: rgba(34, 211, 238, .52); background: rgba(5, 20, 46, .7); box-shadow: 0 0 0 4px rgba(34, 211, 238, .06), inset 0 2px 10px rgba(0, 4, 16, .15); }
+.voice-soft-select__trigger b { color: #a9bdd5; font-size: 17px; transition: transform .2s ease; }
+.voice-soft-select__trigger[aria-expanded='true'] b { transform: rotate(180deg); }
+.voice-soft-select__menu { position: absolute; z-index: 120; top: calc(100% + 8px); left: 0; display: grid; width: 100%; max-height: 300px; overflow: auto; padding: 9px; border: 1px solid rgba(125, 211, 252, .2); border-radius: 20px; background: linear-gradient(155deg, rgba(10, 31, 65, .98), rgba(3, 13, 34, .98)); box-shadow: 0 26px 75px rgba(0, 3, 16, .62), inset 0 1px 0 rgba(224, 242, 254, .08); backdrop-filter: blur(24px) saturate(130%); }
+.voice-soft-select__menu[hidden] { display: none; }
+.voice-soft-select.is-upward .voice-soft-select__menu { top: auto; bottom: calc(100% + 8px); }
+.voice-soft-select__group { display: grid; }
+.voice-soft-select__group > strong { padding: 9px 11px 5px; color: #91a8c6; font-size: 11px; font-weight: 650; }
+.voice-soft-select__group > button { min-height: 38px; padding: 0 12px; color: #d6e3f3; border: 0; border-radius: 12px; background: transparent; font-size: 12px; font-weight: 600; text-align: left; cursor: pointer; }
+.voice-soft-select__group > button:hover { color: #f5fbff; background: rgba(56, 189, 248, .1); }
+.voice-soft-select__group > button[aria-selected='true'] { color: #f7fcff; background: linear-gradient(110deg, rgba(14, 165, 233, .32), rgba(37, 99, 235, .14)); box-shadow: inset 0 0 0 1px rgba(34, 211, 238, .24); }
+
+.voice-asr-layer,
+.browser-config-layer { position: fixed; z-index: 80; inset: 0; display: grid; place-items: center; padding: 32px; visibility: hidden; opacity: 0; pointer-events: none; background: rgba(0, 4, 18, .6); backdrop-filter: blur(15px); transition: opacity .2s ease, visibility .2s ease; }
+.voice-asr-layer.is-open,
+.browser-config-layer.is-open { visibility: visible; opacity: 1; pointer-events: auto; }
+.voice-asr-modal,
+.browser-config-modal { position: relative; width: min(570px, 92vw); max-height: min(650px, 88vh); overflow: auto; padding: 25px; color: #f2f7ff; border: 1px solid rgba(125, 211, 252, .18); border-radius: 30px; background: linear-gradient(145deg, rgba(10, 31, 65, .97), rgba(3, 13, 34, .97)); box-shadow: 0 32px 95px rgba(0, 3, 16, .65), inset 0 1px 0 rgba(224, 242, 254, .08); }
+.voice-asr-modal > header,
+.browser-config-modal > header { display: flex; align-items: flex-start; justify-content: space-between; margin-bottom: 18px; }
+.voice-asr-modal > header h2,
+.browser-config-modal > header h2 { margin: 0; color: #f7fbff; font-size: 23px; }
+.voice-asr-modal > header p,
+.browser-config-modal > header p { margin: 6px 0 0; color: #aebfd5; font-size: 12px; }
+.voice-asr-modal > header button,
+.browser-config-modal > header button { display: grid; place-items: center; width: 34px; height: 34px; color: #b8c8db; border: 1px solid rgba(125, 211, 252, .15); border-radius: 50%; background: rgba(5, 20, 47, .45); cursor: pointer; }
+.voice-asr-resource,
+.browser-config-resource { justify-content: flex-end; margin-bottom: 14px; }
+
+.velia-control .browser-layout { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; }
+.velia-control .browser-status-card { grid-column: 1 / -1; min-height: 145px; padding: 24px; }
+.velia-control .browser-status-card h2 { color: #f5f9ff; font-size: 20px; font-weight: 700; }
+.velia-control .browser-status-card p:last-child { color: #c0cee1; font-size: 13px; font-weight: 600; }
+.velia-control .browser-status-card__icon { color: #7dd3fc; border-radius: 18px; background: radial-gradient(circle, rgba(56, 189, 248, .13), rgba(37, 99, 235, .04)); }
+.velia-control .connection-pill { color: #9fb3cf; border-color: rgba(125, 211, 252, .14); background: rgba(5, 20, 47, .3); font-size: 11px; }
+.velia-control .connection-pill--ready { color: #8fe7ff; }
+.velia-control .browser-setup-card { grid-column: 1; grid-row: 2; }
+.velia-control .browser-firecrawl-card { grid-column: 2; grid-row: 2; }
+.velia-control .browser-actions { margin-top: 16px; }
+.velia-control .browser-firecrawl-summary > .button { margin-top: 14px; }
+
+.velia-bottom-dock { position: static; z-index: 16; justify-self: end; gap: 10px; margin-top: 15px; padding: 0; border: 0; border-radius: 0; background: transparent; box-shadow: none; backdrop-filter: none; }
+.velia-dock-button { min-height: 44px; padding: 0 15px; color: #dbeafe; border: 1px solid rgba(147, 197, 253, .18); border-radius: 999px; background: linear-gradient(145deg, rgba(18, 41, 77, .48), rgba(7, 23, 52, .26)); box-shadow: 0 12px 30px rgba(0, 6, 23, .13), inset 0 1px 0 rgba(224, 242, 254, .055); font-size: 14px; font-weight: 650; }
+.velia-live-capsule { display: flex; align-items: center; width: 164px; height: 48px; padding: 0 18px 0 9px; color: #effbff; border-color: rgba(34, 211, 238, .48); background: linear-gradient(110deg, rgba(14, 165, 233, .35), rgba(37, 99, 235, .22), rgba(139, 92, 246, .1)); box-shadow: 0 16px 40px rgba(14, 165, 233, .15), inset 0 1px 0 rgba(224, 242, 254, .1); }
+.velia-live-capsule > span:last-child { position: static; margin-left: 9px; transform: none; font-size: 14.5px; font-weight: 650; }
+.velia-live-orb-image { width: 35px; height: 35px; object-fit: contain; filter: drop-shadow(0 0 10px rgba(34, 211, 238, .5)); animation: velia-orb-breathe 4.5s ease-in-out infinite; }
+
+.velia-modal-layer { background: rgba(0, 4, 18, .58); backdrop-filter: blur(14px); }
+.velia-modal-surface { border-color: rgba(125, 211, 252, .18); background: linear-gradient(145deg, rgba(10, 31, 65, .97), rgba(3, 13, 34, .97)); box-shadow: 0 32px 95px rgba(0, 3, 16, .65), inset 0 1px 0 rgba(224, 242, 254, .08); }
+
+@media (max-width: 1080px) {
+  .velia-control { grid-template-columns: 205px minmax(0, 1fr); }
+  .velia-control .models-layout,
+  .velia-control .voice-layout { grid-template-columns: 1fr; }
+  .velia-control .browser-layout { grid-template-columns: 1fr; }
+  .velia-control .browser-status-card,
+  .velia-control .browser-setup-card,
+  .velia-control .browser-firecrawl-card { grid-column: 1; grid-row: auto; }
+}
+
+@media (max-height: 820px) {
+  .velia-sidebar { padding-top: 16px; padding-bottom: 13px; }
+  .velia-brand { padding-bottom: 15px; }
+  .velia-navigation { gap: 7px; }
+  .velia-nav-button { min-height: 49px; }
+  .velia-provider-summary { padding: 12px 14px; }
+  .velia-provider-summary > div { min-height: 21px; }
+  .velia-main { padding: 17px 20px 14px; }
+  .velia-main-header { padding-bottom: 13px; }
+  .velia-consciousness .velia-life-orb { width: clamp(205px, 25vw, 270px); height: clamp(205px, 25vw, 270px); }
+  .velia-consciousness__visual { gap: 15px; }
+  .velia-control .voice-console-card { min-height: 500px; }
+  .velia-control .voice-orb { width: 120px; height: 120px; margin-top: 18px; }
+  .velia-bottom-dock { margin-top: 10px; }
+}

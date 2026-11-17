@@ -1,0 +1,18 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://schemas.velia.local/assistant-event.v1.schema.json",
+  "title": "Velia assistant event v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema", "eventId", "sequence", "atUtc", "state", "source"],
+  "properties": {
+    "schema": { "const": "velia-assistant-event/v1" },
+    "eventId": { "type": "string", "format": "uuid" },
+    "sequence": { "type": "integer", "minimum": 1 },
+    "atUtc": { "type": "string", "format": "date-time" },
+    "state": { "enum": ["idle", "listening", "thinking", "speaking"] },
+    "source": { "enum": ["voice", "text", "task", "playback", "system"] },
+    "missionId": { "type": "string", "format": "uuid" },
+    "message": { "type": "string", "minLength": 1, "maxLength": 4096 }
+  }
+}

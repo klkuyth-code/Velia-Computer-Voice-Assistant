@@ -1,0 +1,27 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://schemas.velia.local/input-event.v1.schema.json",
+  "title": "Velia physical input event v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema", "eventId", "sequence", "atUtc", "shortcut", "key", "edge"],
+  "properties": {
+    "schema": { "const": "velia-input-event/v1" },
+    "eventId": { "type": "string", "format": "uuid" },
+    "sequence": { "type": "integer", "minimum": 1 },
+    "atUtc": { "type": "string", "format": "date-time" },
+    "shortcut": { "enum": ["voicePushToTalk", "voiceLongConversation"] },
+    "key": { "enum": ["F8", "Ctrl+Shift+Space", "Ctrl+Alt+L"] },
+    "edge": { "enum": ["pressed", "released"] }
+  },
+  "allOf": [
+    {
+      "if": { "properties": { "shortcut": { "const": "voicePushToTalk" } }, "required": ["shortcut"] },
+      "then": { "properties": { "key": { "enum": ["F8", "Ctrl+Shift+Space"] } } }
+    },
+    {
+      "if": { "properties": { "shortcut": { "const": "voiceLongConversation" } }, "required": ["shortcut"] },
+      "then": { "properties": { "key": { "const": "Ctrl+Alt+L" } } }
+    }
+  ]
+}

@@ -1,0 +1,13 @@
+bin/
+obj/
+TestResults/
+artifacts/
+coverage/
+*.user
+*.suo
+*.log
+*.pem
+*.pfx
+*.key
+*.vault
+license.vault

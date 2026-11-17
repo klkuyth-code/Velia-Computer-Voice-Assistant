@@ -1,0 +1,15 @@
+:root { font-family: "Segoe UI", "Microsoft YaHei UI", sans-serif; color: #eff2fb; background: #0d111c; }
+body { width: 310px; margin: 0; }
+main { display: grid; gap: 13px; padding: 18px; }
+.brand { display: flex; align-items: center; gap: 10px; }
+.brand > span { display: grid; place-items: center; width: 34px; height: 34px; border-radius: 50%; background: linear-gradient(135deg,#53d7ce,#7a59ff,#d65eff); font-weight: 750; }
+.brand div { display: grid; gap: 1px; }
+.brand strong { font-size: 15px; }
+.brand small, .summary, label, .status { color: #8992a8; font-size: 11px; }
+.summary { margin: 0; line-height: 1.55; }
+label { display: grid; gap: 6px; }
+input { width: 100%; box-sizing: border-box; padding: 9px 10px; color: #eef1fa; border: 1px solid #2b3243; border-radius: 8px; outline: none; background: #080b12; }
+input:focus { border-color: #7666dc; }
+button { padding: 10px; color: white; border: 0; border-radius: 8px; background: linear-gradient(120deg,#7158ed,#5877e8); cursor: pointer; font-weight: 650; }
+.status { min-height: 16px; margin: 0; }
+.status[data-ready="true"] { color: #55d9bb; }
